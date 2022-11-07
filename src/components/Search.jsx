@@ -1,12 +1,20 @@
-import { useState } from "react";
+import './Search.css';
 
-export default function Search(props){
-    var [city,setcity]=useState('');
-
-    return(
-        <div className="searchBare">
-            <input type="text" onChange={(e)=> setcity(e.target.value)}  placeholder="Enter City name...." />
-            <button onClick={()=>props.onClick(city)}>Search</button>
+function Search(props) {
+    
+    return ( 
+        <div className="top-level">
+            <div className="search-bare">
+                <input type="text"  placeholder="City..."/> 
+                <button type="button" onClick={(e)=>props.city(e.target.parentNode.firstChild.value)}>Search</button>
+            </div>
+            <div className="switch">
+                Change Unit -
+                <button onClick={props.setUnit}>{props.unit==='metric'?"°C":"°F"}</button>
+            </div>
         </div>
+        
     );
 }
+
+export default Search;

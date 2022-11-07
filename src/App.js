@@ -1,45 +1,58 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import './App.css';
-import View from './components/View';
+import Description from './components/Description';
+import Search from './components/Search';
+
+import { getFormattedWeatherData } from './FetchWeather';
 
 function App() {
-  const API="2ecd2adac7b24ddb2d707a6f59b0728b";
+  
   var [city,setcity]=useState("mdiq");
-  var [data,setdata]=useState();
-  var [err,seterr]=useState("");
-  var [loading,setloading]=useState(false);
+  var [data,setdata]=useState({});
+  var [loading,setloading]=useState(true);
+  var [units,setunits]=useState('metric');
 
-  var getData=async()=>{
-    setloading(true);
-    
-      await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API}&units=metric`)
-    .then(res=>{
-      setdata(res.data);
-      setloading(false);
-    })
-   
-    
-    
-  }
+
+
   var getCity=(city)=>{
     setcity(city);
   }
-  console.log(data)
+
+  var setUnits=()=>{
+    units==="metric"?
+    setunits("imperial"):
+    setunits("metric");
+  }
+  
   useEffect(()=>{
-      getData();
-      if(err!==""){ 
-        alert(err);
-        seterr("");
-      }
-  },[city,err])
+    var getData=async()=>{
+      const response=await getFormattedWeatherData(city,units);
+      setdata(response);
+    }
+    getData();
+    setTimeout(() => {
+      setloading(false);
+    }, 1000);
+    
+
+  },[city,units]);
   return (
     <div className='App'>
       {
-        loading?<h1>Loading...</h1>:
-        <View 
-          onClick={(city)=>getCity(city)}
-        />
+        loading?<h1>loading...</h1>:
+        <div> 
+          <center><h1 color='red'>Weather App</h1></center>
+          <Search 
+            unit={units}
+            setUnit={setUnits}
+            city={(city)=>getCity(city)}
+          />
+          <Description 
+            data={data}
+            unit={units}
+          />
+        </div>
+        
       }
       
     </div>

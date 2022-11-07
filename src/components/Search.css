@@ -1,0 +1,48 @@
+.top-level{
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.search-bare{
+    display: flex;
+    align-items: center;
+    display: flex;
+    width: 100%;
+
+}
+.search-bare input{
+    width: 90%;
+    height: 30px;
+    border-radius: 10px;
+    color: rgba(126, 16, 230, 0.479);
+}
+.search-bare button{
+    width: 10%;
+    height: 35px;
+    border-radius: 12px;
+    text-align: center;
+    background-color: blueviolet;
+    color: white;
+    cursor: pointer;
+}
+.switch {
+    color: white    ;
+    display: flex;
+    margin-top: 5px;
+    width: 30%;
+    justify-content: space-between;
+    align-items: center;
+    align-self: flex-end;
+}
+.switch button{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: white;
+    color: blueviolet ;
+    border-color: white;
+    cursor: pointer;
+}
